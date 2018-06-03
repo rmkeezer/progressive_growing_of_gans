@@ -434,18 +434,22 @@ def create_lsun(tfrecord_dir, lmdb_dir, resolution=256, max_images=None):
 
 def create_celeba(tfrecord_dir, celeba_dir, cx=89, cy=121):
     print('Loading CelebA from "%s"' % celeba_dir)
-    glob_pattern = os.path.join(celeba_dir, 'img_align_celeba_png', '*.png')
+    glob_pattern = os.path.join(celeba_dir, 'done', '*.jpg')
     image_filenames = sorted(glob.glob(glob_pattern))
-    expected_images = 202599
-    if len(image_filenames) != expected_images:
-        error('Expected to find %d images' % expected_images)
+    print(len(image_filenames))
+    # expected_images = 202599
+    # if len(image_filenames) != expected_images:
+    #     error('Expected to find %d images' % expected_images)
     
     with TFRecordExporter(tfrecord_dir, len(image_filenames)) as tfr:
         order = tfr.choose_shuffled_order()
         for idx in range(order.size):
             img = np.asarray(PIL.Image.open(image_filenames[order[idx]]))
-            assert img.shape == (218, 178, 3)
-            img = img[cy - 64 : cy + 64, cx - 64 : cx + 64]
+            if img.shape == (64,64):
+                img = np.stack((img,)*3, -1)
+                print(img.shape)
+            assert img.shape == (64, 64, 3)
+            # img = img[cy - 64 : cy + 64, cx - 64 : cx + 64]
             img = img.transpose(2, 0, 1) # HWC => CHW
             tfr.add_image(img)
 
