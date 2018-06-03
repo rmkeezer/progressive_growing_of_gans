@@ -1,3 +1,6 @@
 datasets/
 metrics/
 results/
+__pycache__/
+*.pyc
+*.jpg
