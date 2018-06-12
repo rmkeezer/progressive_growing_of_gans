@@ -53,7 +53,7 @@ grid        = EasyDict(size='1080p', layout='random')       # Options for train.
 # Dataset (choose one).
 #desc += '-celebahq';            dataset = EasyDict(tfrecord_dir='celebahq'); train.mirror_augment = True
 #desc += '-celeba';              dataset = EasyDict(tfrecord_dir='celeba'); train.mirror_augment = True
-desc += '-danbooru';              dataset = EasyDict(tfrecord_dir='test2'); train.mirror_augment = True
+desc += '-danbooru';              dataset = EasyDict(tfrecord_dir='bhdanbooru256db'); train.mirror_augment = True
 #desc += '-pokes';              dataset = EasyDict(tfrecord_dir='pokesDB'); train.mirror_augment = True
 #desc += '-bf128';              dataset = EasyDict(tfrecord_dir='bluefocusDB'); train.mirror_augment = True
 #desc += '-cifar10';             dataset = EasyDict(tfrecord_dir='cifar10')
